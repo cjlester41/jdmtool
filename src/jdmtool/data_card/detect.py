@@ -47,7 +47,7 @@ def _open_usb_device(usbdev: USBDevice):
         if handle is not None:
             handle.close()
 
-
+GNS_480_VID_PID = (0x05E3, 0x0748)
 SKYBOUND_VID_PID = (0x0E39, 0x1250)
 GARMIN_UNINITIALIZED_VID_PID = (0x091E, 0x0500)
 GARMIN_VID_PID = (0x091E, 0x1300)
@@ -126,6 +126,9 @@ def open_programming_device() -> Generator[ProgrammingDevice, None, None]:
                             print(f"Found at {new_usbdev}")
                             usbdev = new_usbdev
                             break
+
+            elif vid_pid == GNS_480_VID_PID:
+                print(f"Found a Garmin device at {usbdev}")
 
                 dev_cls = GarminProgrammingDevice
                 break

@@ -61,6 +61,7 @@ def open_programming_device() -> Generator[ProgrammingDevice, None, None]:
         dev_cls: type[ProgrammingDevice] | None = None
         for usbdev in usbcontext.getDeviceIterator():
             vid_pid: tuple[int, int] = (usbdev.getVendorID(), usbdev.getProductID())
+            print(vid_pid)
             if vid_pid == SKYBOUND_VID_PID:
                 print(f"Found a Skybound device at {usbdev}")
                 dev_cls = SkyboundDevice
